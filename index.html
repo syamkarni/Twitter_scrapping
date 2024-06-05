@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Trends</title>
+</head>
+<body>
+    <h1>Click here to run the script.</h1>
+    <a href="run_script.py" id="run-script">Click here to run the script.</a>
+    <div id="results"></div>
+    <script>
+        document.getElementById("run-script").onclick = function() {
+            fetch('/run_script.py')
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('results');
+                resultDiv.innerHTML = `
+                    <p>These are the most happening topics as on ${data.datetime}:</p>
+                    <ul>
+                        <li>${data.trend1}</li>
+                        <li>${data.trend2}</li>
+                        <li>${data.trend3}</li>
+                        <li>${data.trend4}</li>
+                        <li>${data.trend5}</li>
+                    </ul>
+                    <p>The IP address used for this query was ${data.ip_address}.</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                    <a href="/run_script.py">Click here to run the query again.</a>
+                `;
+            });
+            return false;
+        }
+    </script>
+</body>
+</html>
