@@ -1,0 +1,5 @@
+Flask
+pymongo
+requests
+selenium
+bs4
